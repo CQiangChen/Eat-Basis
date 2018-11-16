@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>CSS空格处理</title>
+  <style>
+    body {
+      font-size: 20px;
+    }
+    .common{
+      width: 100px;
+      background: red;
+    }
+    #normal-test{
+      white-space: normal;
+    }
+    #nowrap-test{
+      white-space: nowrap;
+    }
+    #pre-test{
+      /* white-space: pre; */
+      /* white-space: pre-wrap; */
+      white-space: pre-line;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 浏览器处理空格的基本规则: 文字的前部和后部的空格都会忽略，内部的连续空格只会算作一个 -->
+  <p> hello world </p>
+
+  <!-- HTML 处理空格的规则，适用于多种字符,浏览器会自动把这些符号转成普通的空格键。但是如若给此处p标签加上宽度，其换行将会生效 -->
+  <p>hello
+    world</p>
+  <p style="width:100px">hello
+    world</p>
+  <!-- 阮一峰老师文中提到：文本内部的换行是无效的（除非文本放在<pre>标签内） -->
+  <!-- ！！！实际操作是有效的，不确定是否是老师书写时出错 -->
+  <p>hello<br/><br/>world</p>
+
+  <!-- 若要保存空格可如下使用 -->
+  <!-- 使用<pre>标签 -->
+  <pre>  hello  world  </pre>
+  <!-- 或者 -->
+  <!-- 改用 HTML 实体&nbsp;表示空格 -->
+  <p>&nbsp;&nbsp;hello&nbsp;&nbsp;world&nbsp;&nbsp;</p>
+
+  <!-- CSS 提供了一个white-space属性，可以提供更精确一点的空格处理方式 -->
+  <!-- white-space中的6种属性：
+      normal:默认值(超出部分在单词完整度的情况下进行换行)，
+      nowrap:不会因为超出容器宽度而发生换行, 
+      pre:就按照<pre>标签的方式处理,
+      pre-wrap:基本按照pre方式处理，但超出容器宽度会发生换行，
+      pre-line：保留了之前提到的换行符，其他按照normal处理.
+    -->
+
+  <p id="normal-test" class="common">  hellohellohello hello
+  world
+  </p>
+  <p id="nowrap-test" class="common">  hellohellohello hello
+  world
+  </p>
+  <p id="pre-test" class="common">  hellohellohello hello
+  world
+  </p>
+
+
+</body>
+
+</html>
